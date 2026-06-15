@@ -632,3 +632,48 @@ Final Verdict:
 * ❌ Release Blocked
 
 Do not conclude testing until every user journey has been executed, every enhancement has been validated, and no additional critical issues can be identified.
+
+---
+
+# Submit Order to Kitchen Flow error fixing
+
+# Role
+Act as Senior QA Automation Architect
+
+# Task
+
+Investigate why the **Submit Order to Kitchen** flow is failing. When a user submits an order, a Firestore-related error occurs.
+
+
+# Context
+
+*The application uses Firebase Firestore as the backend database.
+* The order placement flow was previously functional but is currently failing during the submission process.
+* Users are unable to place orders because the Firestore operation fails.
+* The issue may originate from the frontend, backend integration, Firestore security rules, authentication, data model, document structure, serialization, or asynchronous execution.
+
+# Expected Investigation
+
+Perform a comprehensive analysis of the complete order submission flow, including:
+
+1. Trace the execution flow from the **Submit Order** button to Firestore.
+2. Identify the exact point of failure.
+
+# Deliverables
+
+Provide:
+
+## Root Cause Analysis
+
+* Exact cause of the failure
+* File(s) involved
+* Code location(s)
+* Error message(s)
+
+## Fix Implementation
+
+* Required code changes
+* Explanation of why the fix resolves the issue
+* Any Firestore configuration changes required
+
+---

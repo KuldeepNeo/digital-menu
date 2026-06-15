@@ -19,7 +19,11 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
         fromFirestore: (snapshot, _) => OrderModel.fromJson(
           (snapshot.data() ?? {})..putIfAbsent('id', () => snapshot.id),
         ),
-        toFirestore: (model, _) => model.toJson()..remove('id'),
+        toFirestore: (model, _) {
+          final json = model.toJson()..remove('id');
+          json['items'] = model.items.map((item) => item.toJson()).toList();
+          return json;
+        },
       );
 
   @override

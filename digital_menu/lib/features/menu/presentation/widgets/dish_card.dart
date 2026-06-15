@@ -149,6 +149,14 @@ class DishCard extends StatelessWidget {
                               fontSize: 11,
                             ),
                           ),
+                          const SizedBox(width: 6),
+                          Text(
+                            '• Rate',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: theme.colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                     ),
