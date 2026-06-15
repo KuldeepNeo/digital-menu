@@ -13,6 +13,7 @@ abstract class DishModel with _$DishModel {
     required String photoUrl,
     required String categoryId,
     int? createdAt,
+    @Default(true) bool isAvailable,
   }) = _DishModel;
 
   factory DishModel.fromJson(Map<String, dynamic> json) =>
@@ -25,6 +26,7 @@ abstract class DishModel with _$DishModel {
         photoUrl: entity.photoUrl,
         categoryId: entity.categoryId,
         createdAt: entity.createdAt,
+        isAvailable: entity.isAvailable,
       );
 
   const DishModel._();
@@ -36,5 +38,6 @@ abstract class DishModel with _$DishModel {
         photoUrl: photoUrl,
         categoryId: categoryId,
         createdAt: createdAt,
+        isAvailable: isAvailable,
       );
 }

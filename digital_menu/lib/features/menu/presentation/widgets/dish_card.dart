@@ -25,64 +25,97 @@ class DishCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: dish.photoUrl.startsWith('data:image')
-                ? Image.memory(
-                    base64Decode(dish.photoUrl.split(',').last),
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: Icon(
-                          Icons.broken_image_outlined,
-                          color: Colors.grey,
-                          size: 32,
-                        ),
-                      ),
-                    ),
-                  )
-                : CachedNetworkImage(
-                    imageUrl: dish.photoUrl,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: Icon(
-                          Icons.broken_image_outlined,
-                          color: Colors.grey,
-                          size: 32,
-                        ),
-                      ),
-                    ),
-                  ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                Text(
-                  dish.name,
-                  style: theme.textTheme.titleMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Positioned.fill(
+                  child: dish.photoUrl.startsWith('data:image')
+                      ? Image.memory(
+                          base64Decode(dish.photoUrl.split(',').last),
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: Icon(
+                                Icons.broken_image_outlined,
+                                color: Colors.grey,
+                                size: 32,
+                              ),
+                            ),
+                          ),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: dish.photoUrl,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: Icon(
+                                Icons.broken_image_outlined,
+                                color: Colors.grey,
+                                size: 32,
+                              ),
+                            ),
+                          ),
+                        ),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  '₹${dish.price.toStringAsFixed(0)}',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.primary,
+                if (!dish.isAvailable)
+                  Positioned.fill(
+                    child: Container(
+                      color: Colors.black.withAlpha(120),
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                          ),
+                          child: const Text(
+                            'OUT OF STOCK',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              letterSpacing: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
               ],
+            ),
+          ),
+          Opacity(
+            opacity: dish.isAvailable ? 1.0 : 0.6,
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    dish.name,
+                    style: theme.textTheme.titleMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '₹${dish.price.toStringAsFixed(0)}',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

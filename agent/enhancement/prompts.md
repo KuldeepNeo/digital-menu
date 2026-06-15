@@ -136,3 +136,85 @@ generate : implementation-plan.md
 path: agent/enhancement
 
 ---
+
+
+# Sprint 1: Stock Control & Catalog Foundations
+
+## Role
+
+Act Fullstack Developer.
+
+Read:
+
+* [enhancement-impact-analysis.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/enhancement-impact-analysis.md) 
+* [implementation-plan.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/implementation-plan.md) 
+* [save_token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/template/save_token.md) 
+
+
+## Action
+
+Implement Sprint 1: Stock Control & Catalog Foundations
+
+## Context
+
+- Phase 1 features have been successfully implemented and closed.
+- Phase 2 introduces new enhancements to the existing production codebase.
+
+## Execute
+
+- Implement Sprint 1 only.
+- Follow the implementation plan and  enhancement impact analysis.
+- Reuse existing code.
+- Do not modify unrelated modules.
+- Generate implementation summary after completion.
+
+generate : sprint 1-implementation-summary.md
+path: agent/enhancement/summary/
+
+Stop when the module is fully implemented and ready for QA testing.
+
+
+---
+
+# Sprint 1: Stock Control & Catalog Foundations  QA Testing
+
+## Role
+
+Act as Senior QA Automation Architect
+Read:
+
+* [qa_persona.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/personas/qa_persona.md)  
+* [save-token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/journal-hub/agent-prompts/md-files/save-token.md) 
+
+## Action
+
+Sprint 1: Stock Control & Catalog Foundations
+
+Perform functional, integration, validation, and workflow testing.
+
+## Context
+
+Backend and frontend implementation for this module are complete.
+
+The goal is to determine whether the module is production-ready.
+
+## Execute
+Generate: Test cases report and defect report 
+
+generate : sprint 1-test-report-summary.md
+path: [enhancement](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/audit/enhancement) 
+
+## Expected output format
+
+# Sprint Title
+
+## Validation Functions Table
+
+| KPI Number | KPI | Validation Method | Expected Output | Actual Output | Status | Notes |
+| ---------- | --- | ----------------- | --------------- | ------------- | ------ | ----- |
+| KPI-001 | User can successfully register with valid name, email, and password | Submit POST `/api/v1/auth/register` with valid data, verify HTTP success response, user record creation in database, unique user ID generation, and account status set to pending verification | HTTP 201 response with user data, user record in database, unique user ID generated, account status pending verification | | [PASS/FAIL] | |
+
+
+Strictly follow guideline which mentioned in [enhancement-impact-analysis.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/enhancement-impact-analysis.md) and [implementation-plan.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/implementation-plan.md)  
+
+---

@@ -126,6 +126,7 @@ class _AddDishDialogState extends State<AddDishDialog> {
               fileBytes: _selectedBytes,
               existingPhotoUrl: widget.dish!.photoUrl,
               existingCreatedAt: widget.dish!.createdAt,
+              existingIsAvailable: widget.dish!.isAvailable,
             );
       } else {
         // Add Mode

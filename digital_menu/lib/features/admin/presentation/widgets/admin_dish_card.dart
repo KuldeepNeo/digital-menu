@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../menu/domain/entities/dish.dart';
+import '../controllers/admin_dish_cubit.dart';
 
 class AdminDishCard extends StatelessWidget {
   final Dish dish;
@@ -114,12 +116,44 @@ class AdminDishCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  '₹${dish.price.toStringAsFixed(0)}',
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.primary,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '₹${dish.price.toStringAsFixed(0)}',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          dish.isAvailable ? 'In Stock' : 'Out of Stock',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: dish.isAvailable ? Colors.green : Colors.red,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        SizedBox(
+                          height: 24,
+                          width: 40,
+                          child: Transform.scale(
+                            scale: 0.75,
+                            child: Switch(
+                              value: dish.isAvailable,
+                              onChanged: (value) {
+                                context.read<AdminDishCubit>().toggleAvailability(dish);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

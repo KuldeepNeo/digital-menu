@@ -13,6 +13,7 @@ _DishModel _$DishModelFromJson(Map<String, dynamic> json) => _DishModel(
   photoUrl: json['photoUrl'] as String,
   categoryId: json['categoryId'] as String,
   createdAt: (json['createdAt'] as num?)?.toInt(),
+  isAvailable: json['isAvailable'] as bool? ?? true,
 );
 
 Map<String, dynamic> _$DishModelToJson(_DishModel instance) =>
@@ -23,4 +24,5 @@ Map<String, dynamic> _$DishModelToJson(_DishModel instance) =>
       'photoUrl': instance.photoUrl,
       'categoryId': instance.categoryId,
       'createdAt': instance.createdAt,
+      'isAvailable': instance.isAvailable,
     };

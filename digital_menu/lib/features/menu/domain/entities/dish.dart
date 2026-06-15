@@ -5,6 +5,7 @@ class Dish {
   final String photoUrl;
   final String categoryId;
   final int? createdAt;
+  final bool isAvailable;
 
   const Dish({
     required this.id,
@@ -13,5 +14,7 @@ class Dish {
     required this.photoUrl,
     required this.categoryId,
     this.createdAt,
+    this.isAvailable = true,
   });
 }
+

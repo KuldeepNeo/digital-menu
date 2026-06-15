@@ -178,4 +178,54 @@ void main() {
       ],
     );
   });
+
+  group('toggleAvailability', () {
+    final tDish = Dish(
+      id: 'dish123',
+      name: 'Test Dish',
+      price: 150.0,
+      photoUrl: 'http://image.com',
+      categoryId: 'cat123',
+      isAvailable: true,
+    );
+
+    blocTest<AdminDishCubit, AdminDishState>(
+      'emits [loading, success] when toggling availability succeeds',
+      build: () {
+        when(() => mockUpdateDishUseCase.call(any())).thenAnswer(
+          (_) async => const CloudResult<void>(
+            statusCode: 200,
+            message: 'Success',
+          ),
+        );
+        return cubit;
+      },
+      act: (cubit) => cubit.toggleAvailability(tDish),
+      expect: () => const [
+        AdminDishState.loading(),
+        AdminDishState.success(),
+      ],
+      verify: (_) {
+        verify(() => mockUpdateDishUseCase.call(any())).called(1);
+      },
+    );
+
+    blocTest<AdminDishCubit, AdminDishState>(
+      'emits [loading, error] when toggling availability fails',
+      build: () {
+        when(() => mockUpdateDishUseCase.call(any())).thenAnswer(
+          (_) async => const CloudResult<void>(
+            statusCode: 500,
+            message: 'Error updating in Firestore',
+          ),
+        );
+        return cubit;
+      },
+      act: (cubit) => cubit.toggleAvailability(tDish),
+      expect: () => const [
+        AdminDishState.loading(),
+        AdminDishState.error('Error updating in Firestore'),
+      ],
+    );
+  });
 }

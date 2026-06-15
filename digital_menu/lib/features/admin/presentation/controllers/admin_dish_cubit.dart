@@ -69,6 +69,7 @@ class AdminDishCubit extends Cubit<AdminDishState> {
     Uint8List? fileBytes,
     required String existingPhotoUrl,
     int? existingCreatedAt,
+    bool? existingIsAvailable,
   }) async {
     emit(const AdminDishState.loading());
 
@@ -92,9 +93,30 @@ class AdminDishCubit extends Cubit<AdminDishState> {
       photoUrl: photoUrl,
       categoryId: categoryId,
       createdAt: existingCreatedAt ?? DateTime.now().millisecondsSinceEpoch,
+      isAvailable: existingIsAvailable ?? true,
     );
 
     final result = await _updateDishUseCase(dish);
+    if (result.isSuccess) {
+      emit(const AdminDishState.success());
+    } else {
+      emit(AdminDishState.error(result.message));
+    }
+  }
+
+  Future<void> toggleAvailability(Dish dish) async {
+    emit(const AdminDishState.loading());
+    final updatedDish = Dish(
+      id: dish.id,
+      name: dish.name,
+      price: dish.price,
+      photoUrl: dish.photoUrl,
+      categoryId: dish.categoryId,
+      createdAt: dish.createdAt,
+      isAvailable: !dish.isAvailable,
+    );
+
+    final result = await _updateDishUseCase(updatedDish);
     if (result.isSuccess) {
       emit(const AdminDishState.success());
     } else {
