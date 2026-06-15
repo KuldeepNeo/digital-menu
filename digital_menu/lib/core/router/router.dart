@@ -6,8 +6,10 @@ import '../../features/menu/presentation/pages/home_page.dart';
 import '../../features/menu/presentation/pages/menu_page.dart';
 import '../../features/admin/presentation/pages/admin_page.dart';
 import '../../features/admin/presentation/pages/admin_login_page.dart';
+import '../../features/admin/presentation/pages/kitchen_page.dart';
 import '../../features/admin/presentation/controllers/auth_cubit.dart';
 import '../../features/admin/presentation/controllers/auth_state.dart';
+
 
 class GoRouterRefreshStream extends ChangeNotifier {
   late final StreamSubscription<dynamic> _subscription;
@@ -66,8 +68,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const AdminPage(),
     ),
     GoRoute(
+      path: '/admin/kitchen',
+      builder: (context, state) => const KitchenPage(),
+    ),
+    GoRoute(
       path: '/admin/login',
       builder: (context, state) => const AdminLoginPage(),
     ),
+
   ],
 );

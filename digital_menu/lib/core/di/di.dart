@@ -26,8 +26,12 @@ import '../../features/menu/data/repositories/order_repository_impl.dart';
 import '../../features/menu/domain/repositories/order_repository.dart';
 import '../../features/menu/domain/usecases/submit_order_usecase.dart';
 import '../../features/menu/presentation/bloc/cart_cubit.dart';
+import '../../features/menu/domain/usecases/stream_orders_usecase.dart';
+import '../../features/menu/domain/usecases/update_order_status_usecase.dart';
+import '../../features/admin/presentation/controllers/kitchen_cubit.dart';
 
 final sl = GetIt.instance;
+
 
 Future<void> init() async {
   // External
@@ -67,6 +71,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UpdateDishUseCase(sl()));
   sl.registerLazySingleton(() => DeleteDishUseCase(sl()));
   sl.registerLazySingleton(() => SubmitOrderUseCase(sl()));
+  sl.registerLazySingleton(() => StreamOrdersUseCase(sl()));
+  sl.registerLazySingleton(() => UpdateOrderStatusUseCase(sl()));
 
   // Cubits
   sl.registerFactory(
@@ -88,6 +94,12 @@ Future<void> init() async {
       submitOrderUseCase: sl(),
     ),
   );
+  sl.registerFactory(
+    () => KitchenCubit(
+      streamOrdersUseCase: sl(),
+      updateOrderStatusUseCase: sl(),
+    ),
+  );
   sl.registerLazySingleton(
     () => AuthCubit(
       loginUseCase: sl(),
@@ -96,3 +108,4 @@ Future<void> init() async {
     ),
   );
 }
+

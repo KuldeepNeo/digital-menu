@@ -25,4 +25,28 @@ class OrderRepositoryImpl implements OrderRepository {
       );
     }
   }
+
+  @override
+  Stream<List<Order>> streamActiveOrders() {
+    return _remoteDataSource
+        .streamActiveOrders()
+        .map((list) => list.map((model) => model.toEntity()).toList());
+  }
+
+  @override
+  Future<CloudResult<void>> updateOrderStatus(String orderId, String status) async {
+    try {
+      await _remoteDataSource.updateOrderStatus(orderId, status);
+      return const CloudResult(
+        statusCode: 200,
+        message: 'Order status updated successfully.',
+      );
+    } catch (e) {
+      return CloudResult(
+        statusCode: 500,
+        message: 'Error updating order status: $e',
+      );
+    }
+  }
 }
+

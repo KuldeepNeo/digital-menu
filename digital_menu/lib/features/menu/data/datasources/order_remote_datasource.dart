@@ -4,6 +4,8 @@ import '../models/order_model.dart';
 
 abstract class OrderRemoteDataSource {
   Future<void> submitOrder(OrderModel order);
+  Stream<List<OrderModel>> streamActiveOrders();
+  Future<void> updateOrderStatus(String orderId, String status);
 }
 
 class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
@@ -24,4 +26,18 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   Future<void> submitOrder(OrderModel order) async {
     await _ordersRef.add(order);
   }
+
+  @override
+  Stream<List<OrderModel>> streamActiveOrders() {
+    return _ordersRef
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
+
+  @override
+  Future<void> updateOrderStatus(String orderId, String status) async {
+    await _ordersRef.doc(orderId).update({'status': status});
+  }
 }
+

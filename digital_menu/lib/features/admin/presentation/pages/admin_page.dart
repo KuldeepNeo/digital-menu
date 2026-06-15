@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/di/di.dart';
+
 import '../../../menu/presentation/bloc/menu_cubit.dart';
 import '../../../menu/presentation/bloc/menu_state.dart';
 import '../controllers/auth_cubit.dart';
@@ -100,6 +102,14 @@ class AdminPageView extends StatelessWidget {
                 ),
               ),
             ),
+            TextButton.icon(
+              onPressed: () => context.go('/admin/kitchen'),
+              icon: const Icon(Icons.kitchen_rounded),
+              label: const Text('Kitchen View'),
+              style: TextButton.styleFrom(
+                foregroundColor: theme.colorScheme.primary,
+              ),
+            ),
             IconButton(
               icon: const Icon(Icons.logout_rounded),
               tooltip: 'Sign Out',
@@ -108,6 +118,7 @@ class AdminPageView extends StatelessWidget {
               },
             ),
             const SizedBox(width: 16),
+
           ],
         ),
         body: Container(
