@@ -460,3 +460,175 @@ path: [enhancement](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe
 Strictly follow guideline which mentioned in 
 [sprint_4-implementation-summary.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/summary/sprint_4-implementation-summary.md)  [enhancement-impact-analysis.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/enhancement-impact-analysis.md) and [implementation-plan.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/implementation-plan.md)  
 
+---
+
+# End-to-End User Journey Validation
+
+## Role
+
+Act as the QA Lead Engineer.
+
+Before starting, read and follow:
+* [save_token.md](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/template/save_token.md) 
+[summary](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/summary) 
+[implementation-plan](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/implementation-plan) 
+[walkthrough](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/agent/enhancement/walkthrough) 
+[enhancement](file;file:///Users/neo/Desktop/Vibe%20Coding%20Training/vibe_projects/digital-menu/audit/enhancement) 
+
+
+Adopt all QA standards, testing strategies, reporting guidelines, and token-saving practices.
+
+---
+
+## Action
+
+Perform a comprehensive End-to-End User Journey Validation by running the application.
+
+Your objective is to validate the application exactly as a real user would interact with it.
+
+Do not rely solely on source code inspection. Execute the application, navigate through every screen, and validate complete workflows.
+
+Assume hidden defects exist and attempt to discover them.
+
+---
+
+## Context
+
+The enhancement implementation is complete.
+
+The objective is to validate that:
+
+* Existing functionality continues to work.
+* Newly implemented enhancements integrate correctly.
+* User workflows are intuitive and stable.
+* No crashes, navigation failures, state issues, or data inconsistencies exist.
+
+---
+
+## Execute
+
+### Phase 1 – Application Review
+
+* Launch the application.
+* Verify application startup.
+* Verify authentication flow.
+* Verify initial navigation.
+* Review overall UI consistency.
+
+---
+
+### Phase 2 – End-to-End User Journey
+
+Execute every major user workflow from start to finish.
+
+For each workflow verify:
+
+* Navigation
+* UI rendering
+* API responses
+* State updates
+* Data persistence
+* Error handling
+* Success messages
+* Back navigation
+* Refresh behavior
+* Edge cases
+
+Do not skip any workflow.
+
+---
+
+### Phase 3 – Enhancement Validation
+
+Validate every enhancement implemented in Phase 2.
+
+For each enhancement:
+
+* Verify expected functionality.
+* Verify interaction with existing features.
+* Verify edge cases.
+* Verify failure scenarios.
+* Verify rollback/navigation behavior.
+* Verify no regression is introduced.
+
+---
+
+### Phase 4 – Exploratory Testing
+
+Attempt to break the application using realistic user behavior.
+
+Examples include:
+
+* Rapid repeated taps
+* Multiple navigation actions
+* Background and foreground transitions
+* Device rotation
+* Invalid inputs
+* Empty states
+* Large datasets
+* Network interruption (if supported)
+* Repeated create/update/delete operations
+* Long user sessions
+
+Continue until no additional critical defects are discovered.
+
+---
+
+### Phase 5 – Regression Validation
+
+Revalidate all existing modules affected by the enhancements.
+
+Ensure:
+
+* Existing functionality remains unchanged.
+* No regression defects exist.
+* User experience is consistent throughout the application.
+
+---
+
+## Deliverables
+
+Generate reports under:
+
+audit/enhancement/qa-lead-engineer-report/
+
+Generate:
+
+* end-to-end-test-report.md
+* exploratory-test-report.md
+* regression-report.md
+* defect-report.md
+* production-readiness-report.md
+
+Each report should include:
+
+* Executive Summary
+* User Journeys Executed
+* Test Coverage
+* Screens Validated
+* Defects Identified
+* Severity & Priority
+* Risks
+* Recommendations
+
+---
+
+## Final Assessment
+
+Provide:
+
+* Feature Completion Status
+* Enhancement Validation Summary
+* Regression Summary
+* Stability Assessment
+* User Experience Assessment
+* Production Readiness Score
+
+Final Verdict:
+
+* ✅ Approved for Release
+* ⚠️ Approved with Minor Issues
+* 🔄 Rework Required
+* ❌ Release Blocked
+
+Do not conclude testing until every user journey has been executed, every enhancement has been validated, and no additional critical issues can be identified.
