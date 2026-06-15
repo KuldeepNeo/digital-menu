@@ -14,6 +14,8 @@ abstract class DishModel with _$DishModel {
     required String categoryId,
     int? createdAt,
     @Default(true) bool isAvailable,
+    @Default(0.0) double averageRating,
+    @Default(0) int numRatings,
   }) = _DishModel;
 
   factory DishModel.fromJson(Map<String, dynamic> json) =>
@@ -27,6 +29,8 @@ abstract class DishModel with _$DishModel {
         categoryId: entity.categoryId,
         createdAt: entity.createdAt,
         isAvailable: entity.isAvailable,
+        averageRating: entity.averageRating,
+        numRatings: entity.numRatings,
       );
 
   const DishModel._();
@@ -39,5 +43,8 @@ abstract class DishModel with _$DishModel {
         categoryId: categoryId,
         createdAt: createdAt,
         isAvailable: isAvailable,
+        averageRating: averageRating,
+        numRatings: numRatings,
       );
 }
+

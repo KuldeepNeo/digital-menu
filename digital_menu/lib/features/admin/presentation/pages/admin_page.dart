@@ -11,6 +11,8 @@ import '../controllers/admin_dish_cubit.dart';
 import '../controllers/admin_dish_state.dart';
 import '../widgets/add_dish_dialog.dart';
 import '../widgets/admin_dish_card.dart';
+import '../widgets/set_special_dialog.dart';
+
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
@@ -185,30 +187,67 @@ class AdminPageView extends StatelessWidget {
                             ),
                           ],
                         ),
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            showDialog<bool>(
-                              context: context,
-                              builder: (dialogContext) => BlocProvider<AdminDishCubit>(
-                                create: (_) => sl<AdminDishCubit>(),
-                                child: AddDishDialog(categories: menuState.categories),
+                        Wrap(
+                          spacing: 12,
+                          runSpacing: 12,
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                showDialog<bool>(
+                                  context: context,
+                                  builder: (dialogContext) => const SetSpecialDialog(),
+                                ).then((success) {
+                                  if (context.mounted && success == true) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Daily special banner configured successfully.'),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  }
+                                });
+                              },
+                              icon: const Icon(Icons.star_rounded),
+                              label: const Text('Set Special'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: theme.colorScheme.secondary,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                               ),
-                            );
-                          },
-                          icon: const Icon(Icons.add_rounded),
-                          label: const Text('Add Dish'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: theme.colorScheme.primary,
-                            foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 16,
                             ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                showDialog<bool>(
+                                  context: context,
+                                  builder: (dialogContext) => BlocProvider<AdminDishCubit>(
+                                    create: (_) => sl<AdminDishCubit>(),
+                                    child: AddDishDialog(categories: menuState.categories),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.add_rounded),
+                              label: const Text('Add Dish'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: theme.colorScheme.primary,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 16,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
+
                       ],
                     ),
                     const SizedBox(height: 24),

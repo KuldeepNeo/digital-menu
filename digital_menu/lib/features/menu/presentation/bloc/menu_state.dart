@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../domain/entities/menu_category.dart';
 import '../../domain/entities/dish.dart';
+import '../../domain/entities/special.dart';
 
 part 'menu_state.freezed.dart';
 
@@ -13,5 +14,8 @@ abstract class MenuState with _$MenuState {
     @Default(false) bool isLoadingDishes,
     String? selectedCategoryId,
     String? errorMessage,
+    Special? dailySpecial,
+    Dish? dailySpecialDish,
   }) = _MenuState;
 }
+

@@ -14,6 +14,8 @@ _DishModel _$DishModelFromJson(Map<String, dynamic> json) => _DishModel(
   categoryId: json['categoryId'] as String,
   createdAt: (json['createdAt'] as num?)?.toInt(),
   isAvailable: json['isAvailable'] as bool? ?? true,
+  averageRating: (json['averageRating'] as num?)?.toDouble() ?? 0.0,
+  numRatings: (json['numRatings'] as num?)?.toInt() ?? 0,
 );
 
 Map<String, dynamic> _$DishModelToJson(_DishModel instance) =>
@@ -25,4 +27,6 @@ Map<String, dynamic> _$DishModelToJson(_DishModel instance) =>
       'categoryId': instance.categoryId,
       'createdAt': instance.createdAt,
       'isAvailable': instance.isAvailable,
+      'averageRating': instance.averageRating,
+      'numRatings': instance.numRatings,
     };

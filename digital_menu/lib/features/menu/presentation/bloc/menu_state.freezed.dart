@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MenuState {
 
- List<MenuCategory> get categories; List<Dish> get dishes; bool get isLoadingCategories; bool get isLoadingDishes; String? get selectedCategoryId; String? get errorMessage;
+ List<MenuCategory> get categories; List<Dish> get dishes; bool get isLoadingCategories; bool get isLoadingDishes; String? get selectedCategoryId; String? get errorMessage; Special? get dailySpecial; Dish? get dailySpecialDish;
 /// Create a copy of MenuState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MenuStateCopyWith<MenuState> get copyWith => _$MenuStateCopyWithImpl<MenuState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MenuState&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.dishes, dishes)&&(identical(other.isLoadingCategories, isLoadingCategories) || other.isLoadingCategories == isLoadingCategories)&&(identical(other.isLoadingDishes, isLoadingDishes) || other.isLoadingDishes == isLoadingDishes)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MenuState&&const DeepCollectionEquality().equals(other.categories, categories)&&const DeepCollectionEquality().equals(other.dishes, dishes)&&(identical(other.isLoadingCategories, isLoadingCategories) || other.isLoadingCategories == isLoadingCategories)&&(identical(other.isLoadingDishes, isLoadingDishes) || other.isLoadingDishes == isLoadingDishes)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dailySpecial, dailySpecial) || other.dailySpecial == dailySpecial)&&(identical(other.dailySpecialDish, dailySpecialDish) || other.dailySpecialDish == dailySpecialDish));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(dishes),isLoadingCategories,isLoadingDishes,selectedCategoryId,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(categories),const DeepCollectionEquality().hash(dishes),isLoadingCategories,isLoadingDishes,selectedCategoryId,errorMessage,dailySpecial,dailySpecialDish);
 
 @override
 String toString() {
-  return 'MenuState(categories: $categories, dishes: $dishes, isLoadingCategories: $isLoadingCategories, isLoadingDishes: $isLoadingDishes, selectedCategoryId: $selectedCategoryId, errorMessage: $errorMessage)';
+  return 'MenuState(categories: $categories, dishes: $dishes, isLoadingCategories: $isLoadingCategories, isLoadingDishes: $isLoadingDishes, selectedCategoryId: $selectedCategoryId, errorMessage: $errorMessage, dailySpecial: $dailySpecial, dailySpecialDish: $dailySpecialDish)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MenuStateCopyWith<$Res>  {
   factory $MenuStateCopyWith(MenuState value, $Res Function(MenuState) _then) = _$MenuStateCopyWithImpl;
 @useResult
 $Res call({
- List<MenuCategory> categories, List<Dish> dishes, bool isLoadingCategories, bool isLoadingDishes, String? selectedCategoryId, String? errorMessage
+ List<MenuCategory> categories, List<Dish> dishes, bool isLoadingCategories, bool isLoadingDishes, String? selectedCategoryId, String? errorMessage, Special? dailySpecial, Dish? dailySpecialDish
 });
 
 
@@ -62,7 +62,7 @@ class _$MenuStateCopyWithImpl<$Res>
 
 /// Create a copy of MenuState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? categories = null,Object? dishes = null,Object? isLoadingCategories = null,Object? isLoadingDishes = null,Object? selectedCategoryId = freezed,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? categories = null,Object? dishes = null,Object? isLoadingCategories = null,Object? isLoadingDishes = null,Object? selectedCategoryId = freezed,Object? errorMessage = freezed,Object? dailySpecial = freezed,Object? dailySpecialDish = freezed,}) {
   return _then(_self.copyWith(
 categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
 as List<MenuCategory>,dishes: null == dishes ? _self.dishes : dishes // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,9 @@ as List<Dish>,isLoadingCategories: null == isLoadingCategories ? _self.isLoading
 as bool,isLoadingDishes: null == isLoadingDishes ? _self.isLoadingDishes : isLoadingDishes // ignore: cast_nullable_to_non_nullable
 as bool,selectedCategoryId: freezed == selectedCategoryId ? _self.selectedCategoryId : selectedCategoryId // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,dailySpecial: freezed == dailySpecial ? _self.dailySpecial : dailySpecial // ignore: cast_nullable_to_non_nullable
+as Special?,dailySpecialDish: freezed == dailySpecialDish ? _self.dailySpecialDish : dailySpecialDish // ignore: cast_nullable_to_non_nullable
+as Dish?,
   ));
 }
 
@@ -155,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage,  Special? dailySpecial,  Dish? dailySpecialDish)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MenuState() when $default != null:
-return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage);case _:
+return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage,_that.dailySpecial,_that.dailySpecialDish);case _:
   return orElse();
 
 }
@@ -176,10 +178,10 @@ return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.is
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage,  Special? dailySpecial,  Dish? dailySpecialDish)  $default,) {final _that = this;
 switch (_that) {
 case _MenuState():
-return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage);case _:
+return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage,_that.dailySpecial,_that.dailySpecialDish);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -196,10 +198,10 @@ return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.is
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MenuCategory> categories,  List<Dish> dishes,  bool isLoadingCategories,  bool isLoadingDishes,  String? selectedCategoryId,  String? errorMessage,  Special? dailySpecial,  Dish? dailySpecialDish)?  $default,) {final _that = this;
 switch (_that) {
 case _MenuState() when $default != null:
-return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage);case _:
+return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.isLoadingDishes,_that.selectedCategoryId,_that.errorMessage,_that.dailySpecial,_that.dailySpecialDish);case _:
   return null;
 
 }
@@ -211,7 +213,7 @@ return $default(_that.categories,_that.dishes,_that.isLoadingCategories,_that.is
 
 
 class _MenuState implements MenuState {
-  const _MenuState({final  List<MenuCategory> categories = const [], final  List<Dish> dishes = const [], this.isLoadingCategories = false, this.isLoadingDishes = false, this.selectedCategoryId, this.errorMessage}): _categories = categories,_dishes = dishes;
+  const _MenuState({final  List<MenuCategory> categories = const [], final  List<Dish> dishes = const [], this.isLoadingCategories = false, this.isLoadingDishes = false, this.selectedCategoryId, this.errorMessage, this.dailySpecial, this.dailySpecialDish}): _categories = categories,_dishes = dishes;
   
 
  final  List<MenuCategory> _categories;
@@ -232,6 +234,8 @@ class _MenuState implements MenuState {
 @override@JsonKey() final  bool isLoadingDishes;
 @override final  String? selectedCategoryId;
 @override final  String? errorMessage;
+@override final  Special? dailySpecial;
+@override final  Dish? dailySpecialDish;
 
 /// Create a copy of MenuState
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +247,16 @@ _$MenuStateCopyWith<_MenuState> get copyWith => __$MenuStateCopyWithImpl<_MenuSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MenuState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._dishes, _dishes)&&(identical(other.isLoadingCategories, isLoadingCategories) || other.isLoadingCategories == isLoadingCategories)&&(identical(other.isLoadingDishes, isLoadingDishes) || other.isLoadingDishes == isLoadingDishes)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MenuState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._dishes, _dishes)&&(identical(other.isLoadingCategories, isLoadingCategories) || other.isLoadingCategories == isLoadingCategories)&&(identical(other.isLoadingDishes, isLoadingDishes) || other.isLoadingDishes == isLoadingDishes)&&(identical(other.selectedCategoryId, selectedCategoryId) || other.selectedCategoryId == selectedCategoryId)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.dailySpecial, dailySpecial) || other.dailySpecial == dailySpecial)&&(identical(other.dailySpecialDish, dailySpecialDish) || other.dailySpecialDish == dailySpecialDish));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_dishes),isLoadingCategories,isLoadingDishes,selectedCategoryId,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_dishes),isLoadingCategories,isLoadingDishes,selectedCategoryId,errorMessage,dailySpecial,dailySpecialDish);
 
 @override
 String toString() {
-  return 'MenuState(categories: $categories, dishes: $dishes, isLoadingCategories: $isLoadingCategories, isLoadingDishes: $isLoadingDishes, selectedCategoryId: $selectedCategoryId, errorMessage: $errorMessage)';
+  return 'MenuState(categories: $categories, dishes: $dishes, isLoadingCategories: $isLoadingCategories, isLoadingDishes: $isLoadingDishes, selectedCategoryId: $selectedCategoryId, errorMessage: $errorMessage, dailySpecial: $dailySpecial, dailySpecialDish: $dailySpecialDish)';
 }
 
 
@@ -263,7 +267,7 @@ abstract mixin class _$MenuStateCopyWith<$Res> implements $MenuStateCopyWith<$Re
   factory _$MenuStateCopyWith(_MenuState value, $Res Function(_MenuState) _then) = __$MenuStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<MenuCategory> categories, List<Dish> dishes, bool isLoadingCategories, bool isLoadingDishes, String? selectedCategoryId, String? errorMessage
+ List<MenuCategory> categories, List<Dish> dishes, bool isLoadingCategories, bool isLoadingDishes, String? selectedCategoryId, String? errorMessage, Special? dailySpecial, Dish? dailySpecialDish
 });
 
 
@@ -280,7 +284,7 @@ class __$MenuStateCopyWithImpl<$Res>
 
 /// Create a copy of MenuState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? dishes = null,Object? isLoadingCategories = null,Object? isLoadingDishes = null,Object? selectedCategoryId = freezed,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? dishes = null,Object? isLoadingCategories = null,Object? isLoadingDishes = null,Object? selectedCategoryId = freezed,Object? errorMessage = freezed,Object? dailySpecial = freezed,Object? dailySpecialDish = freezed,}) {
   return _then(_MenuState(
 categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<MenuCategory>,dishes: null == dishes ? _self._dishes : dishes // ignore: cast_nullable_to_non_nullable
@@ -288,7 +292,9 @@ as List<Dish>,isLoadingCategories: null == isLoadingCategories ? _self.isLoading
 as bool,isLoadingDishes: null == isLoadingDishes ? _self.isLoadingDishes : isLoadingDishes // ignore: cast_nullable_to_non_nullable
 as bool,selectedCategoryId: freezed == selectedCategoryId ? _self.selectedCategoryId : selectedCategoryId // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,dailySpecial: freezed == dailySpecial ? _self.dailySpecial : dailySpecial // ignore: cast_nullable_to_non_nullable
+as Special?,dailySpecialDish: freezed == dailySpecialDish ? _self.dailySpecialDish : dailySpecialDish // ignore: cast_nullable_to_non_nullable
+as Dish?,
   ));
 }
 

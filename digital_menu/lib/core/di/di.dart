@@ -29,8 +29,15 @@ import '../../features/menu/presentation/bloc/cart_cubit.dart';
 import '../../features/menu/domain/usecases/stream_orders_usecase.dart';
 import '../../features/menu/domain/usecases/update_order_status_usecase.dart';
 import '../../features/admin/presentation/controllers/kitchen_cubit.dart';
+import '../../features/menu/domain/usecases/submit_rating_usecase.dart';
+import '../../features/menu/domain/usecases/stream_special_usecase.dart';
+import '../../features/menu/domain/usecases/set_special_usecase.dart';
+import '../../features/menu/domain/usecases/get_dish_by_id_usecase.dart';
+import '../../features/menu/domain/usecases/get_all_dishes_usecase.dart';
 
 final sl = GetIt.instance;
+
+
 
 
 Future<void> init() async {
@@ -73,14 +80,24 @@ Future<void> init() async {
   sl.registerLazySingleton(() => SubmitOrderUseCase(sl()));
   sl.registerLazySingleton(() => StreamOrdersUseCase(sl()));
   sl.registerLazySingleton(() => UpdateOrderStatusUseCase(sl()));
+  sl.registerLazySingleton(() => SubmitRatingUseCase(sl()));
+  sl.registerLazySingleton(() => StreamSpecialUseCase(sl()));
+  sl.registerLazySingleton(() => SetSpecialUseCase(sl()));
+  sl.registerLazySingleton(() => GetDishByIdUseCase(sl()));
+  sl.registerLazySingleton(() => GetAllDishesUseCase(sl()));
+
 
   // Cubits
   sl.registerFactory(
     () => MenuCubit(
       getCategoriesUseCase: sl(),
       getDishesByCategoryUseCase: sl(),
+      streamSpecialUseCase: sl(),
+      getDishByIdUseCase: sl(),
+      submitRatingUseCase: sl(),
     ),
   );
+
   sl.registerFactory(
     () => AdminDishCubit(
       addDishUseCase: sl(),

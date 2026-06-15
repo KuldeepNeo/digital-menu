@@ -127,7 +127,10 @@ class _AddDishDialogState extends State<AddDishDialog> {
               existingPhotoUrl: widget.dish!.photoUrl,
               existingCreatedAt: widget.dish!.createdAt,
               existingIsAvailable: widget.dish!.isAvailable,
+              existingAverageRating: widget.dish!.averageRating,
+              existingNumRatings: widget.dish!.numRatings,
             );
+
       } else {
         // Add Mode
         context.read<AdminDishCubit>().createDish(

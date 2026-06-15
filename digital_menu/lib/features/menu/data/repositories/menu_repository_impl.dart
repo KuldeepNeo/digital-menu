@@ -4,8 +4,10 @@ import '../../../../core/network/cloud_result.dart';
 import '../../domain/repositories/menu_repository.dart';
 import '../../domain/entities/menu_category.dart';
 import '../../domain/entities/dish.dart';
+import '../../domain/entities/special.dart';
 import '../datasources/menu_remote_datasource.dart';
 import '../models/dish_model.dart';
+
 
 class MenuRepositoryImpl implements MenuRepository {
   final MenuRemoteDataSource _remoteDataSource;
@@ -120,4 +122,93 @@ class MenuRepositoryImpl implements MenuRepository {
       );
     }
   }
+
+  @override
+  Stream<CloudResult<Special?>> streamDailySpecial() {
+    return _remoteDataSource.streamDailySpecial().map<CloudResult<Special?>>(
+      (specialModel) {
+        return CloudResult(
+          statusCode: 200,
+          data: specialModel?.toEntity(),
+          message: 'Daily special streamed successfully.',
+        );
+      },
+    ).handleError(
+      (error) {
+        return CloudResult<Special?>(
+          statusCode: 500,
+          message: 'Error streaming daily special: $error',
+        );
+      },
+    );
+  }
+
+  @override
+  Future<CloudResult<void>> setDailySpecial(String dishId, String title, int expiresAt) async {
+    try {
+      await _remoteDataSource.setDailySpecial(dishId, title, expiresAt);
+      return const CloudResult(
+        statusCode: 200,
+        message: 'Daily special set successfully.',
+      );
+    } catch (e) {
+      return CloudResult(
+        statusCode: 500,
+        message: 'Error setting daily special: $e',
+      );
+    }
+  }
+
+  @override
+  Future<CloudResult<void>> submitRating(String dishId, int rating) async {
+    try {
+      await _remoteDataSource.submitRating(dishId, rating);
+      return const CloudResult(
+        statusCode: 200,
+        message: 'Rating submitted successfully.',
+      );
+    } catch (e) {
+      return CloudResult(
+        statusCode: 500,
+        message: 'Error submitting rating: $e',
+      );
+    }
+  }
+
+  @override
+  Future<CloudResult<Dish>> getDishById(String dishId) async {
+    try {
+      final model = await _remoteDataSource.getDishById(dishId);
+      return CloudResult(
+        statusCode: 200,
+        data: model.toEntity(),
+        message: 'Dish loaded successfully.',
+      );
+    } catch (e) {
+      return CloudResult(
+        statusCode: 500,
+        message: 'Error loading dish: $e',
+      );
+    }
+  }
+
+  @override
+  Future<CloudResult<List<Dish>>> getAllDishes() async {
+    try {
+      final models = await _remoteDataSource.getAllDishes();
+      final dishes = models.map((m) => m.toEntity()).toList();
+      return CloudResult(
+        statusCode: 200,
+        data: dishes,
+        message: 'All dishes loaded successfully.',
+      );
+    } catch (e) {
+      return CloudResult(
+        statusCode: 500,
+        message: 'Error loading all dishes: $e',
+      );
+    }
+  }
 }
+
+

@@ -8,6 +8,8 @@ import '../bloc/cart_cubit.dart';
 import '../bloc/cart_state.dart';
 import '../widgets/dish_card.dart';
 import '../widgets/cart_sheet.dart';
+import '../widgets/daily_specials_banner.dart';
+
 
 class MenuPage extends StatelessWidget {
   final String? tableNumber;
@@ -151,8 +153,14 @@ class MenuPageContent extends StatelessWidget {
                     );
                   },
                 ),
+                if (state.dailySpecial != null && state.dailySpecialDish != null)
+                  DailySpecialsBanner(
+                    special: state.dailySpecial!,
+                    dish: state.dailySpecialDish!,
+                  ),
                 // Horizontal category slider
                 if (state.categories.isNotEmpty)
+
                   SizedBox(
                     height: 60,
                     child: ListView.builder(

@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/dish.dart';
 import '../bloc/cart_cubit.dart';
 import '../bloc/cart_state.dart';
+import '../bloc/menu_cubit.dart';
+import 'rating_dialog.dart';
+
 
 class DishCard extends StatelessWidget {
   final Dish dish;
@@ -109,7 +112,49 @@ class DishCard extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
+                  const SizedBox(height: 2),
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (dialogContext) => RatingDialog(
+                          dish: dish,
+                          onSubmit: (rating) {
+                            context.read<MenuCubit>().rateDish(dish.id, rating);
+                          },
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(4),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.star_rounded, color: Colors.amber[700], size: 16),
+                          const SizedBox(width: 4),
+                          Text(
+                            dish.averageRating > 0
+                                ? dish.averageRating.toStringAsFixed(1)
+                                : '0.0',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            '(${dish.numRatings})',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: Colors.grey[600],
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 4),
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

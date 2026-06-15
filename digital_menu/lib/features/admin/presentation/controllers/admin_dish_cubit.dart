@@ -70,6 +70,8 @@ class AdminDishCubit extends Cubit<AdminDishState> {
     required String existingPhotoUrl,
     int? existingCreatedAt,
     bool? existingIsAvailable,
+    double? existingAverageRating,
+    int? existingNumRatings,
   }) async {
     emit(const AdminDishState.loading());
 
@@ -94,6 +96,8 @@ class AdminDishCubit extends Cubit<AdminDishState> {
       categoryId: categoryId,
       createdAt: existingCreatedAt ?? DateTime.now().millisecondsSinceEpoch,
       isAvailable: existingIsAvailable ?? true,
+      averageRating: existingAverageRating ?? 0.0,
+      numRatings: existingNumRatings ?? 0,
     );
 
     final result = await _updateDishUseCase(dish);
@@ -114,6 +118,8 @@ class AdminDishCubit extends Cubit<AdminDishState> {
       categoryId: dish.categoryId,
       createdAt: dish.createdAt,
       isAvailable: !dish.isAvailable,
+      averageRating: dish.averageRating,
+      numRatings: dish.numRatings,
     );
 
     final result = await _updateDishUseCase(updatedDish);
@@ -123,6 +129,7 @@ class AdminDishCubit extends Cubit<AdminDishState> {
       emit(AdminDishState.error(result.message));
     }
   }
+
 
   Future<void> deleteDish(String dishId) async {
     emit(const AdminDishState.loading());

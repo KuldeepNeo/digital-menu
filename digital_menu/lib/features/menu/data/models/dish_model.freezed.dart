@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DishModel {
 
- String get id; String get name; double get price; String get photoUrl; String get categoryId; int? get createdAt; bool get isAvailable;
+ String get id; String get name; double get price; String get photoUrl; String get categoryId; int? get createdAt; bool get isAvailable; double get averageRating; int get numRatings;
 /// Create a copy of DishModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DishModelCopyWith<DishModel> get copyWith => _$DishModelCopyWithImpl<DishModel>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DishModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DishModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.averageRating, averageRating) || other.averageRating == averageRating)&&(identical(other.numRatings, numRatings) || other.numRatings == numRatings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,price,photoUrl,categoryId,createdAt,isAvailable);
+int get hashCode => Object.hash(runtimeType,id,name,price,photoUrl,categoryId,createdAt,isAvailable,averageRating,numRatings);
 
 @override
 String toString() {
-  return 'DishModel(id: $id, name: $name, price: $price, photoUrl: $photoUrl, categoryId: $categoryId, createdAt: $createdAt, isAvailable: $isAvailable)';
+  return 'DishModel(id: $id, name: $name, price: $price, photoUrl: $photoUrl, categoryId: $categoryId, createdAt: $createdAt, isAvailable: $isAvailable, averageRating: $averageRating, numRatings: $numRatings)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DishModelCopyWith<$Res>  {
   factory $DishModelCopyWith(DishModel value, $Res Function(DishModel) _then) = _$DishModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, double price, String photoUrl, String categoryId, int? createdAt, bool isAvailable
+ String id, String name, double price, String photoUrl, String categoryId, int? createdAt, bool isAvailable, double averageRating, int numRatings
 });
 
 
@@ -65,7 +65,7 @@ class _$DishModelCopyWithImpl<$Res>
 
 /// Create a copy of DishModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? price = null,Object? photoUrl = null,Object? categoryId = null,Object? createdAt = freezed,Object? isAvailable = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? price = null,Object? photoUrl = null,Object? categoryId = null,Object? createdAt = freezed,Object? isAvailable = null,Object? averageRating = null,Object? numRatings = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,9 @@ as double,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast
 as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as int?,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,averageRating: null == averageRating ? _self.averageRating : averageRating // ignore: cast_nullable_to_non_nullable
+as double,numRatings: null == numRatings ? _self.numRatings : numRatings // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -159,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable,  double averageRating,  int numRatings)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DishModel() when $default != null:
-return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable);case _:
+return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable,_that.averageRating,_that.numRatings);case _:
   return orElse();
 
 }
@@ -180,10 +182,10 @@ return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable,  double averageRating,  int numRatings)  $default,) {final _that = this;
 switch (_that) {
 case _DishModel():
-return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable);case _:
+return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable,_that.averageRating,_that.numRatings);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +202,10 @@ return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  double price,  String photoUrl,  String categoryId,  int? createdAt,  bool isAvailable,  double averageRating,  int numRatings)?  $default,) {final _that = this;
 switch (_that) {
 case _DishModel() when $default != null:
-return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable);case _:
+return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,_that.createdAt,_that.isAvailable,_that.averageRating,_that.numRatings);case _:
   return null;
 
 }
@@ -215,7 +217,7 @@ return $default(_that.id,_that.name,_that.price,_that.photoUrl,_that.categoryId,
 @JsonSerializable()
 
 class _DishModel extends DishModel {
-  const _DishModel({required this.id, required this.name, required this.price, required this.photoUrl, required this.categoryId, this.createdAt, this.isAvailable = true}): super._();
+  const _DishModel({required this.id, required this.name, required this.price, required this.photoUrl, required this.categoryId, this.createdAt, this.isAvailable = true, this.averageRating = 0.0, this.numRatings = 0}): super._();
   factory _DishModel.fromJson(Map<String, dynamic> json) => _$DishModelFromJson(json);
 
 @override final  String id;
@@ -225,6 +227,8 @@ class _DishModel extends DishModel {
 @override final  String categoryId;
 @override final  int? createdAt;
 @override@JsonKey() final  bool isAvailable;
+@override@JsonKey() final  double averageRating;
+@override@JsonKey() final  int numRatings;
 
 /// Create a copy of DishModel
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DishModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DishModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.photoUrl, photoUrl) || other.photoUrl == photoUrl)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.isAvailable, isAvailable) || other.isAvailable == isAvailable)&&(identical(other.averageRating, averageRating) || other.averageRating == averageRating)&&(identical(other.numRatings, numRatings) || other.numRatings == numRatings));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,price,photoUrl,categoryId,createdAt,isAvailable);
+int get hashCode => Object.hash(runtimeType,id,name,price,photoUrl,categoryId,createdAt,isAvailable,averageRating,numRatings);
 
 @override
 String toString() {
-  return 'DishModel(id: $id, name: $name, price: $price, photoUrl: $photoUrl, categoryId: $categoryId, createdAt: $createdAt, isAvailable: $isAvailable)';
+  return 'DishModel(id: $id, name: $name, price: $price, photoUrl: $photoUrl, categoryId: $categoryId, createdAt: $createdAt, isAvailable: $isAvailable, averageRating: $averageRating, numRatings: $numRatings)';
 }
 
 
@@ -259,7 +263,7 @@ abstract mixin class _$DishModelCopyWith<$Res> implements $DishModelCopyWith<$Re
   factory _$DishModelCopyWith(_DishModel value, $Res Function(_DishModel) _then) = __$DishModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, double price, String photoUrl, String categoryId, int? createdAt, bool isAvailable
+ String id, String name, double price, String photoUrl, String categoryId, int? createdAt, bool isAvailable, double averageRating, int numRatings
 });
 
 
@@ -276,7 +280,7 @@ class __$DishModelCopyWithImpl<$Res>
 
 /// Create a copy of DishModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? price = null,Object? photoUrl = null,Object? categoryId = null,Object? createdAt = freezed,Object? isAvailable = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? price = null,Object? photoUrl = null,Object? categoryId = null,Object? createdAt = freezed,Object? isAvailable = null,Object? averageRating = null,Object? numRatings = null,}) {
   return _then(_DishModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -285,7 +289,9 @@ as double,photoUrl: null == photoUrl ? _self.photoUrl : photoUrl // ignore: cast
 as String,categoryId: null == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as int?,isAvailable: null == isAvailable ? _self.isAvailable : isAvailable // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,averageRating: null == averageRating ? _self.averageRating : averageRating // ignore: cast_nullable_to_non_nullable
+as double,numRatings: null == numRatings ? _self.numRatings : numRatings // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
