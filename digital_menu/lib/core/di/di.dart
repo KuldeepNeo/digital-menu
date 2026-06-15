@@ -21,6 +21,11 @@ import '../../features/menu/domain/usecases/upload_dish_image_usecase.dart';
 import '../../features/menu/domain/usecases/update_dish_usecase.dart';
 import '../../features/menu/domain/usecases/delete_dish_usecase.dart';
 import '../../features/admin/presentation/controllers/admin_dish_cubit.dart';
+import '../../features/menu/data/datasources/order_remote_datasource.dart';
+import '../../features/menu/data/repositories/order_repository_impl.dart';
+import '../../features/menu/domain/repositories/order_repository.dart';
+import '../../features/menu/domain/usecases/submit_order_usecase.dart';
+import '../../features/menu/presentation/bloc/cart_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -36,6 +41,9 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(sl()),
   );
+  sl.registerLazySingleton<OrderRemoteDataSource>(
+    () => OrderRemoteDataSourceImpl(sl()),
+  );
 
   // Repositories
   sl.registerLazySingleton<MenuRepository>(
@@ -43,6 +51,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton<OrderRepository>(
+    () => OrderRepositoryImpl(sl()),
   );
 
   // Use Cases
@@ -55,6 +66,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => UploadDishImageUseCase(sl()));
   sl.registerLazySingleton(() => UpdateDishUseCase(sl()));
   sl.registerLazySingleton(() => DeleteDishUseCase(sl()));
+  sl.registerLazySingleton(() => SubmitOrderUseCase(sl()));
 
   // Cubits
   sl.registerFactory(
@@ -69,6 +81,11 @@ Future<void> init() async {
       uploadDishImageUseCase: sl(),
       updateDishUseCase: sl(),
       deleteDishUseCase: sl(),
+    ),
+  );
+  sl.registerFactory(
+    () => CartCubit(
+      submitOrderUseCase: sl(),
     ),
   );
   sl.registerLazySingleton(

@@ -57,7 +57,9 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: '/menu',
-      builder: (context, state) => const MenuPage(),
+      builder: (context, state) => MenuPage(
+        tableNumber: state.uri.queryParameters['table'],
+      ),
     ),
     GoRoute(
       path: '/admin',

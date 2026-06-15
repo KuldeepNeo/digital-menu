@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/dish.dart';
+import '../bloc/cart_cubit.dart';
+import '../bloc/cart_state.dart';
 
 class DishCard extends StatelessWidget {
   final Dish dish;
@@ -107,12 +110,70 @@ class DishCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    '₹${dish.price.toStringAsFixed(0)}',
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: theme.colorScheme.primary,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '₹${dish.price.toStringAsFixed(0)}',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                      if (dish.isAvailable)
+                        BlocBuilder<CartCubit, CartState>(
+                          builder: (context, cartState) {
+                            final quantity = cartState.itemQuantities[dish.id] ?? 0;
+                            if (quantity == 0) {
+                              return SizedBox(
+                                height: 32,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.read<CartCubit>().addDish(dish);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    backgroundColor: theme.colorScheme.primary,
+                                    foregroundColor: Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    elevation: 0,
+                                  ),
+                                  child: const Text('Add', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                ),
+                              );
+                            }
+                            return Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove_circle_outline_rounded, size: 20),
+                                  onPressed: () => context.read<CartCubit>().removeDish(dish),
+                                  constraints: const BoxConstraints(),
+                                  padding: EdgeInsets.zero,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text(
+                                    '$quantity',
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add_circle_outline_rounded, size: 20),
+                                  onPressed: () => context.read<CartCubit>().addDish(dish),
+                                  constraints: const BoxConstraints(),
+                                  padding: EdgeInsets.zero,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                    ],
                   ),
                 ],
               ),
